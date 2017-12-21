@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
   FILE *fp;
   int line = 1;
   char *substring;
@@ -12,29 +13,35 @@ int main(int argc, char *argv[]){
   char *splitted;
   int word_index = 0;
 
-  if(argc < 3 || argc > 3){
+  if(argc < 3 || argc > 3)
+  {
     printf("Usage: %s <file> <string>\n", argv[0]);
     exit(1);
   }
 
-  if(strstr(argv[1], ".txt") == NULL){
+  if(strstr(argv[1], ".txt") == NULL)
+  {
     printf("Search can only be applied to txt files\n");
     return(0);
   }
   
-  if((fp = fopen(argv[1], "r")) == NULL){
+  if((fp = fopen(argv[1], "r")) == NULL)
+  {
     printf("Error\n");
     return(0);
   }
 
-  while(fgets(temp, 512, fp) != NULL){
+  while(fgets(temp, 512, fp) != NULL)
+  {
     splitted = strtok(temp, " ");
     word_index = 0;
 
-    while((splitted != NULL)){
+    while((splitted != NULL))
+    {
       substring = strstr(splitted, argv[2]);
 
-      if(substring != NULL){
+      if(substring != NULL)
+      {
         pos = (strlen(temp) - strlen(substring)) + (word_index * (strlen(substring) + 1));
         printf("%d:%d %s\n", line, pos, argv[2]);
         found = 1;
@@ -47,11 +54,13 @@ int main(int argc, char *argv[]){
     line++;
   }
 
-  if(!found){
+  if(!found)
+  {
     printf("No matches\n");
   }
   
-  if(fp){
+  if(fp)
+  {
     fclose(fp);
   }
   
